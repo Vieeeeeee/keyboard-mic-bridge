@@ -160,8 +160,8 @@ final class Bridge: NSObject, NSApplicationDelegate {
     var intent = Intent()
     var enabled = false
     var note: String?
-    // Output stays bound to MiRemoteV 2ch while enabled: rebinding per press made SayAll and this app
-    // reconfigure the shared device and stop each other's engines.
+    // Output binds to MiRemoteV 2ch on the first press and is released after a minute unused, so idle costs nothing
+    // while back-to-back presses skip the device reconfiguration that SayAll and this app trip over.
     var engine: AVAudioEngine?
     var player: AVAudioPlayerNode?
     var configObserver: NSObjectProtocol?
@@ -286,7 +286,6 @@ final class Bridge: NSObject, NSApplicationDelegate {
         }
         enabled = true; note = nil; intent = Intent(); fnDown = false
         watchLog()
-        startOutput()
         refresh()
     }
 
@@ -525,6 +524,11 @@ final class Bridge: NSObject, NSApplicationDelegate {
         let c = capture
         capture = nil
         audioQueue.async { c?.session.stopRunning() }
+        let idle = generation
+        DispatchQueue.main.asyncAfter(deadline: .now() + 60) { [weak self] in
+            guard let self, self.generation == idle else { return }   // used again since: keep it
+            self.dropOutput()
+        }
     }
 
     // MARK: Self-test

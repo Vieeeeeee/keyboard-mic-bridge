@@ -6,6 +6,7 @@ trap 'rm -rf "$build_dir"' EXIT
 app_dir="$build_dir/KeyboardMicBridge.app"
 mkdir -p "$app_dir/Contents/MacOS" "$project_dir/dist"
 cp "$project_dir/resources/Info.plist.template" "$app_dir/Contents/Info.plist"
+mkdir -p "$app_dir/Contents/Resources" && cp "$project_dir/resources/AppIcon.icns" "$app_dir/Contents/Resources/"
 plutil -lint "$app_dir/Contents/Info.plist"
 xcrun swiftc -O -warnings-as-errors -module-cache-path "$build_dir/module-cache" \
   "$project_dir/src/KeyboardMicBridge.swift" -o "$app_dir/Contents/MacOS/KeyboardMicBridge"

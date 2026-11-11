@@ -4,8 +4,9 @@
 <key>CFBundleIdentifier</key><string>design.abdc.KeyboardMicBridge.Test</string>
 <key>CFBundleName</key><string>键盘语音兼容</string>
 <key>CFBundleExecutable</key><string>KeyboardMicBridge</string>
+<key>CFBundleIconFile</key><string>AppIcon</string>
 <key>CFBundlePackageType</key><string>APPL</string>
-<key>CFBundleShortVersionString</key><string>0.1.0</string>
+<key>CFBundleShortVersionString</key><string>0.2.1</string>
 <key>LSUIElement</key><true/>
 <key>NSMicrophoneUsageDescription</key><string>仅在你通过 Fn 开始语音时，将电脑麦克风实时转发给豆包使用的 MiRemoteV 2ch。不保存录音、不联网。</string>
 </dict></plist>
