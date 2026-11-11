@@ -1,0 +1,17 @@
+.DS_Store
+._*
+dist/
+build/
+.build/
+*.app/
+*.dSYM/
+*.log
+*.jsonl
+*.wav
+*.mp3
+*.m4a
+*.pcm
+*.caf
+.env
+.env.*
+private/
