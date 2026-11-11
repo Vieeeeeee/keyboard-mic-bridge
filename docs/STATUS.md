@@ -64,3 +64,7 @@ CPU 100% 约代表一个核心；RSS 不含全部系统音频服务。历史记�
 遥控器相关结论（未改动，属于 SayAll／遥控器固件范围）：
 - 点按开关式录音：SayAll（无线麦）自带“持续录音实验功能”（按键映射里，`experimentalContinuousRecordingEnabled`，当前关闭），本工具无法替代。
 - 单次 1 分钟上限：SayAll 自己的说明写明“单次最长 1 分钟”，是遥控器链路限制，本工具无法延长。
+
+### 遥控器持续录音实测（2026-11-11 18:07）
+
+用 `--rc003-voice-extension-test` 启动 SayAll 后，它自动跑了延长测试：`RC003 EXTENSION test_started max_duration_s=120` → 8 秒后 `MIC_EXTEND failed` → `stopping reason=extend_rejected`。即遥控器固件拒绝延长麦克风会话，点按式持续录音与突破 60 秒在这台 RC003 上都不可行。`experimentalContinuousRecordingEnabled` 每次启动都被 SayAll 重置为关闭。已用普通方式重启 SayAll 恢复原状（`rc003_test=false`）；修改前的 SayAll 设置备份在 `private/`（不进 Git）。
